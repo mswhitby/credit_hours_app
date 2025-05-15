@@ -8,6 +8,13 @@ async function setup() {
     await insertPartial("header.html", "header");
     await insertPartial("studentTemplate.html", "result");
 
+    const dateEl = document.getElementById("current-date");
+    if (dateEl) {
+        const today = new Date();
+        const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+        dateEl.textContent = today.toLocaleDateString('en-US', options);
+    }
+
     const searchBtn = document.getElementById("search-btn");
     if (searchBtn) {
         searchBtn.addEventListener("click", searchStudent);
@@ -32,12 +39,16 @@ function searchStudent() {
     const tmpl = document.getElementById("student-template");
     const clone = tmpl.content.cloneNode(true);
 
-    clone.querySelector(".student-name").textContent = data.name;
-    clone.querySelector(".student-id").textContent = data.id;
-    clone.querySelector(".student-grade").textContent = data.grade;
-    clone.querySelector(".student-credits").textContent = `${data.currentCredits} / ${data.requiredCredits}`;
-    clone.querySelector(".student-missed").textContent = data.missedHours;
-    clone.querySelector(".student-madeup").textContent = data.madeUpHours;
+    clone.querySelector("#student-name").textContent = data.name;
+    clone.querySelector("#student-id").textContent = data.id;
+    clone.querySelector("#student-grade").textContent = data.grade;
+
+    // clone.querySelector("#hours-lost").textContent = data.missedHours;
+    // clone.querySelector("#hours-gained").textContent = data.madeUpHours;
+    // clone.querySelector("#hours-needed").textContent = data.missedHours - data.madeUpHours;
+    //
+    // clone.querySelector("#credits-outstanding").textContent = `${data.currentCredits} / ${data.requiredCredits}`;
+
 
     const tbody = clone.querySelector(".attendance-table");
     tbody.innerHTML = data.attendanceHistory.map(row => `
@@ -53,3 +64,7 @@ function searchStudent() {
     result.appendChild(clone);
     section.style.display = "block";
 }
+
+
+
+

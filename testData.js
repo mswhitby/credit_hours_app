@@ -1,7 +1,7 @@
 window.searchByID = function searchByID(id) {
     const mockStudents = {
-        "10005967": {
-            id: "10005967",
+        "12345": {
+            id: "12345",
             name: "Aaliyah Roberson",
             grade: "11",
             missedHours: 8,
@@ -16,8 +16,8 @@ window.searchByID = function searchByID(id) {
                 { date: "2025-04-30", type: "Absence", hours: 3, status: "Missed" }
             ]
         },
-        "10002345": {
-            id: "10002345",
+        "67890": {
+            id: "67890",
             name: "Xander Fields",
             grade: "12",
             missedHours: 6,
