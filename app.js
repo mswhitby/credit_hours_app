@@ -43,11 +43,9 @@ function searchStudent() {
     clone.querySelector("#student-id").textContent = data.id;
     clone.querySelector("#student-grade").textContent = data.grade;
 
-    // clone.querySelector("#hours-lost").textContent = data.missedHours;
-    // clone.querySelector("#hours-gained").textContent = data.madeUpHours;
-    // clone.querySelector("#hours-needed").textContent = data.missedHours - data.madeUpHours;
-    //
-    // clone.querySelector("#credits-outstanding").textContent = `${data.currentCredits} / ${data.requiredCredits}`;
+    clone.querySelector("#hours-lost").textContent = data.missedHours;
+    clone.querySelector("#hours-gained").textContent = data.madeUpHours;
+    clone.querySelector("#hours-needed").textContent = data.missedHours - data.madeUpHours;
 
 
     const tbody = clone.querySelector(".attendance-table");

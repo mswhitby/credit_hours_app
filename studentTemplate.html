@@ -1,77 +1,76 @@
 <template id="student-template">
+
+    <!-- Student Section Container-->
     <div class="student-wrapper">
-        <!-- Student Info -->
+
+
+        <!-- Student Info Container -->
         <section class="student-info-card">
+
+            <!-- Student Name & ID -->
             <div class="student-info-main">
                 <h3 class="student-name" id="student-name"></h3>
                 <p class="student-id" id="student-id"></p>
             </div>
+            <!-- Student Grade -->
             <div class="student-grade-badge">
                 <span id="student-grade" class="student-grade"></span>
             </div>
         </section>
 
-        <!-- Summary Grid -->
+        <!-- Student Summary Container -->
         <section class="student-summary">
 
-            <!-- Attendance Summary -->
+            <!-- Attendance Summary Card -->
             <section class="student-summary-card">
                 <h4 class="student-summary-header">Attendance Summary</h4>
-                <div class="summary-item lost">
-                    <div>
+
+                <!-- Attendance Summary Components -->
+                <div class="student-summary-grid">
+                    <!-- Hours Lost -->
+                    <div class="summary-item lost">
                         <h5>Hours Lost</h5>
                         <p class="student-summary-count" id="hours-lost"></p>
                         <p class="student-summary-desc">Total hours you need to recover</p>
                     </div>
-                </div>
-                <div class="summary-item recovered">
-                    <div>
+                    <!-- Hours Made Up -->
+                    <div class="summary-item recovered">
                         <h5>Hours Recovered</h5>
                         <p class="student-summary-count" id="hours-gained"></p>
                         <p class="student-summary-desc">Hours you've completed</p>
                     </div>
-                </div>
-                <div class="summary-item needed">
-                    <div>
+                    <!-- Hours Still Needed -->
+                    <div class="summary-item needed">
                         <h5>Hours Needed</h5>
                         <p class="student-summary-count" id="hours-needed"></p>
                         <p class="student-summary-desc">Hours you still need</p>
                     </div>
                 </div>
+            <!-- Attendance Summary Container End -->
             </section>
 
-            <!-- Credits Summary -->
-<!--            <section class="student-summary-card">-->
-<!--                <h4 class="student-summary-header">Credits Summary</h4>-->
-<!--                <div class="summary-item lost">-->
-<!--                    <h5>Credits Lost</h5>-->
-<!--                    <p class="student-summary-count" id="credits-lost"></p>-->
-<!--                    <p class="student-summary-desc">Total credits you need to recover</p>-->
-<!--                </div>-->
-<!--                <div class="summary-item recovered">-->
-<!--                    <h5>Credits Recovered</h5>-->
-<!--                    <p class="student-summary-count" id="credits-recovered"></p>-->
-<!--                    <p class="student-summary-desc">Credits you've recovered</p>-->
-<!--                </div>-->
-<!--                <div class="summary-item needed">-->
-<!--                    <h5>Credits Needed</h5>-->
-<!--                    <p class="student-summary-count" id="credits-outstanding"></p>-->
-<!--                    <p class="student-summary-desc">Credits you can still recover</p>-->
-<!--                </div>-->
-<!--            </section>-->
-
-            <!-- Attendance Table -->
+            <!-- Attendance History -->
             <section class="student-table-card">
-                <h4>Attendance History</h4>
-                <table>
+                <h4 class="attendance-header">Attendance History</h4>
+                <!-- Attendance Table -->
+                <table class="attendance-table">
                     <thead>
-                        <tr><th>Date</th><th>Type</th><th>Hours</th><th>Status</th></tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Hours</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody class="attendance-table"></tbody>
                 </table>
             </section>
+
+        <!-- Student Summary Container End-->
         </section>
+    <!-- Student Section Container End -->
     </div>
+
 </template>
 
 
