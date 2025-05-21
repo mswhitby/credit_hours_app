@@ -2,20 +2,6 @@
 
 <!-- style.html -->
 
-:root {
-    --color-primary: #ef3225;
-    --color-primary-dark: #c52b1e;
-    --color-primary-soft: #fdd9d4;
-
-    --color-black: #000000;
-    --color-gray-800: #1f2937;
-    --color-gray-400: #9ca3af;
-    --color-gray-200: #e5e7eb;
-    --color-gray-100: #f7f7f7;
-
-    --color-white: #ffffff;
-}
-
 body {
     font-family: Inter, sans-serif;
     margin: 0;
@@ -25,8 +11,7 @@ body {
 
 /* ==== Header ==== */
 header {
-    /*background: linear-gradient(to right, #2563eb, #4f46e5); !* from-blue-600 to-indigo-700 *!*/
-    background: #ef3225;
+    background: linear-gradient(to right, #2563eb, #4f46e5); /* from-blue-600 to-indigo-700 */
     color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     padding: 24px 0;
@@ -95,8 +80,7 @@ header .search-input {
 }
 
 header .search-button {
-    /*background: #1e3a8a;*/
-    background: #000000;
+    background: #1e3a8a;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -118,14 +102,6 @@ header .search-button:hover {
 
 }
 
-
-/*.student-info, .stats-card, .attendance-card, .location-card {*/
-/*    background-color: white;*/
-/*    padding: 20px;*/
-/*    margin-bottom: 20px;*/
-/*    border: 1px solid #ddd;*/
-/*}*/
-
 /* ==== Student Info Card ==== */
 
 .student-summary-card, .student-info-card {
@@ -142,7 +118,6 @@ header .search-button:hover {
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     margin-bottom: 1rem;
-    /*padding: 1.5rem 2rem;*/
 }
 
 
@@ -179,9 +154,7 @@ header .search-button:hover {
 .student-summary-card {
     background: #fff;
     border-radius: 16px;
-    /*padding: 2rem;*/
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    /*max-width: 1000px;*/
     margin: 1rem auto;
 }
 
@@ -197,8 +170,6 @@ header .search-button:hover {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1.25rem;
-    /*padding: 0;*/
-    /*margin: 10px;*/
 }
 
 .summary-item {
@@ -207,7 +178,6 @@ header .search-button:hover {
     border-radius: 12px;
     padding: 1rem 1.5rem;
     box-sizing: border-box;
-    /*margin-bottom: 1rem;*/
 }
 
 .summary-item h5 {
@@ -231,9 +201,6 @@ header .search-button:hover {
 
 .summary-item.lost {
     background-color: #fff5f5;
-    /*display: inline-block;*/
-    /*width: 48%;*/
-    /*vertical-align: top;*/
 }
 
 .summary-item.lost h5::before {
@@ -243,9 +210,6 @@ header .search-button:hover {
 
 .summary-item.recovered {
     background-color: #f1fcf3;
-    /*display: inline-block;*/
-    /*width: 48%;*/
-    /*float: right;*/
 }
 
 .summary-item.recovered h5::before {
@@ -255,24 +219,12 @@ header .search-button:hover {
 
 .summary-item.needed {
     background-color: #eef4ff;
-    /*display: block;*/
-    /*clear: both;*/
-    /*margin-top: 1.5rem;*/
-    /*text-align: space-between;*/
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    /*align-items: center;*/
 }
 
 .summary-item.needed h5::before {
     background-image: url('https://img.icons8.com/ios-filled/50/1e6eff/lightning-bolt.png');
     background-color: #d9e8ff;
 }
-
-
-
-
-
 
 .student-summary-count {
     font-size: 2rem;
@@ -281,10 +233,6 @@ header .search-button:hover {
     margin: 0;
 }
 
-/*.summary-item.needed .student-summary-count {*/
-/*    color: #1a4fd6;*/
-/*    font-size: 1.8rem;*/
-/*}*/
 .student-summary-desc {
     font-size: 0.95rem;
     color: #666;
@@ -354,21 +302,4 @@ header .search-button:hover {
 .attendance-table tr:hover {
     background-color: #f9fafb;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

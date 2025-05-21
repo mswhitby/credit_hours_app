@@ -1,44 +1,68 @@
+<!-- script.html -->
 <script>
-    document.getElementById('search-btn').addEventListener('click', () => {
-        const code = document.getElementById('student-id-search').value.trim();
-        if (!code) return;
-        document.getElementById('search-btn').innerText = 'Searching...';
+    async function insertPartial(file, elementId) {
+        const response = await HtmlService.createHtmlOutputFromFile(file).getContent();
+        const html = await response.text();
+        document.getElementById(elementId).innerHTML = html;
+    }
 
-        google.script.run.withSuccessHandler(data => {
-            document.getElementById('search-btn').innerText = 'Search';
-            if (!data) {
-                document.getElementById('no-student-modal').style.display = 'block';
-                return;
-            }
-            // Display data
-            document.getElementById('student-name').innerText = data.name;
-            document.getElementById('student-id').innerText = `ID: ${data.id}`;
-            document.getElementById('student-grade').innerText = data.grade;
-            document.getElementById('missed-hours').innerText = data.missedHours;
-            document.getElementById('made-up-hours').innerText = data.madeUpHours;
-            document.getElementById('hours-remaining').innerText = Math.max(0, data.missedHours - data.madeUpHours);
-            // document.getElementById('current-credits').innerText = data.currentCredits;
-            // document.getElementById('required-credits').innerText = data.requiredCredits;
-            // document.getElementById('missing-credits').innerText = Math.max(0, data.requiredCredits - data.currentCredits);
-
-            const table = document.getElementById('attendance-table');
-            table.innerHTML = '';
-            data.attendanceHistory.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-          <td>${new Date(row.date).toLocaleDateString()}</td>
-          <td>${row.type}${row.activity ? ` (${row.activity})` : ''}</td>
-          <td>${row.hours}</td>
-          <td><span class="${row.status === 'Missed' ? 'status-missed' : 'status-completed'}">${row.status}</span></td>
-        `;
-                table.appendChild(tr);
-            });
-        }).searchByID(code);
-    });
-
-    document.querySelectorAll('.close-error-modal-btn').forEach(btn => {
-        btn.onclick = () => {
-            document.getElementById('no-student-modal').style.display = 'none';
+    async function setup() {
+        const dateEl = document.getElementById("current-date");
+        if (dateEl) {
+            const today = new Date();
+            const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+            dateEl.textContent = today.toLocaleDateString('en-US', options);
         }
-    });
+
+        const searchBtn = document.getElementById("search-btn");
+        if (searchBtn) {
+            searchBtn.addEventListener("click", searchStudent);
+        } else {
+            console.warn("search-btn not found — make sure header.html has finished loading");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", setup);
+
+    function searchStudent() {
+        const id = document.getElementById("student-id-search").value.trim();
+        google.script.run.withSuccessHandler(displayStudent).searchByID(id);
+    }
+
+    function displayStudent(data) {
+        const section = document.getElementById("student-section");
+        const result = document.getElementById("result");
+
+        if (!data) {
+            result.innerHTML = "<p>No student found.</p>";
+            return;
+        }
+
+        // Clear search box
+        document.getElementById("student-id-search").value = "";
+
+        const tmpl = document.getElementById("student-template");
+        const clone = tmpl.content.cloneNode(true);
+
+        clone.querySelector("#student-name").textContent = data["Student"];
+        clone.querySelector("#student-id").textContent = data["ID Number"];
+        clone.querySelector("#student-grade").textContent = `Grade: ${data["Grade"]}`;
+
+        clone.querySelector("#hours-lost").textContent = data["Hours Lost"];
+        clone.querySelector("#hours-gained").textContent = data["Hours Gained"];
+        clone.querySelector("#hours-needed").textContent = data["Hours Needed"];
+
+        const tbody = clone.querySelector(".attendance-table");
+        tbody.innerHTML = data.attendanceHistory.map(row => `
+            <tr>
+              <td>${row.date}</td>
+              <td>${row.type}${row.activity ? ` (${row.activity})` : ''}</td>
+              <td>${row.hours}</td>
+            </tr>
+        `).join('');
+
+        result.innerHTML = "";
+        result.appendChild(clone);
+        section.style.display = "block";
+    }
 </script>

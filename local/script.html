@@ -1,0 +1,44 @@
+<script>
+    document.getElementById('search-btn').addEventListener('click', () => {
+        const code = document.getElementById('student-id-search').value.trim();
+        if (!code) return;
+        document.getElementById('search-btn').innerText = 'Searching...';
+
+        google.script.run.withSuccessHandler(data => {
+            document.getElementById('search-btn').innerText = 'Search';
+            if (!data) {
+                document.getElementById('no-student-modal').style.display = 'block';
+                return;
+            }
+            // Display data
+            document.getElementById('student-name').innerText = data.name;
+            document.getElementById('student-id').innerText = `ID: ${data.id}`;
+            document.getElementById('student-grade').innerText = data.grade;
+            document.getElementById('missed-hours').innerText = data.missedHours;
+            document.getElementById('made-up-hours').innerText = data.madeUpHours;
+            document.getElementById('hours-remaining').innerText = Math.max(0, data.missedHours - data.madeUpHours);
+            // document.getElementById('current-credits').innerText = data.currentCredits;
+            // document.getElementById('required-credits').innerText = data.requiredCredits;
+            // document.getElementById('missing-credits').innerText = Math.max(0, data.requiredCredits - data.currentCredits);
+
+            const table = document.getElementById('attendance-table');
+            table.innerHTML = '';
+            data.attendanceHistory.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td>${new Date(row.date).toLocaleDateString()}</td>
+          <td>${row.type}${row.activity ? ` (${row.activity})` : ''}</td>
+          <td>${row.hours}</td>
+          <td><span class="${row.status === 'Missed' ? 'status-missed' : 'status-completed'}">${row.status}</span></td>
+        `;
+                table.appendChild(tr);
+            });
+        }).searchByID(code);
+    });
+
+    document.querySelectorAll('.close-error-modal-btn').forEach(btn => {
+        btn.onclick = () => {
+            document.getElementById('no-student-modal').style.display = 'none';
+        }
+    });
+</script>
